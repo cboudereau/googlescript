@@ -1,6 +1,6 @@
 # GsToXlsx
 
-Backup a google sheet to a xlsx format into a folder named <sheet name>_Backup/<sheet name>_<yyyyMMddHHmmss>.xlsx.
+Backup a google sheet to a xlsx format into a folder named <<sheet name>>_Backup/<<sheet name>>_<<yyyyMMddHHmmss>>.xlsx.
 
 ## How to use it.
 
