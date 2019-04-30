@@ -25,18 +25,21 @@ function exportSpreadsheet(spreadsheet) {
   
   var parents = spreadsheetFile.getParents();
   
-  var exported = DriveApp.createFile(blob);
-  
-  while (parents.hasNext()) {
+  if (parents.hasNext()){
     var parent = parents.next();
     var paths = parent.getFoldersByName(backupFolderName);
     var backupFolder = paths.hasNext() ? paths.next() : parent.createFolder(backupFolderName);
-  
-    var exported = DriveApp.createFile(blob);
-  
-    Logger.log("copying " + exportName + " to " + backupFolderName);
-  
-    exported.makeCopy(backupFolder);
+    Logger.log("creating " + exportName + " to " + backupFolderName);
+    var exported = backupFolder.createFile(blob);
+    
+    while (parents.hasNext()) {
+      var parent = parents.next();
+      var paths = parent.getFoldersByName(backupFolderName);
+      var backupFolder = paths.hasNext() ? paths.next() : parent.createFolder(backupFolderName);
+      
+      Logger.log("copying " + exportName + " to " + backupFolderName);
+      
+      exported.makeCopy(backupFolder);
+    }  
   }
-  DriveApp.removeFile(exported);
 }
